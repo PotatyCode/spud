@@ -1,4 +1,0 @@
-[project]
-name = hello
-cpp_standard = 23
-compiler = clang
