@@ -16,4 +16,6 @@ pub enum Commands {
     },
     // Build project
     Build {},
+
+    Run {},
 }

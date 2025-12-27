@@ -5,6 +5,7 @@ pub mod build;
 pub mod cli;
 pub mod config;
 pub mod init;
+pub mod run;
 pub use cli::Cli;
 
 fn main() -> Result<()> {
@@ -20,8 +21,13 @@ fn run(cli: Cli) -> Result<()> {
             Ok(())
         }
         Commands::Build {} => {
+            build().context("failed to build")?;
+            Ok(())
+        }
+        Commands::Run {} => {
             let config = Config::load("Spud.toml").context("failed to load Spud.toml")?;
-            build(&config).context("failed to build")?;
+            build().context("failed to build")?;
+            run::run(&config)?;
             Ok(())
         }
     }

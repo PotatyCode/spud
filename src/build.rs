@@ -1,8 +1,7 @@
 use std::process::Command;
 
-use crate::config::Config;
 use anyhow::{Context, Result};
-pub fn build(config: &Config) -> Result<()> {
+pub fn build() -> Result<()> {
     let cmake_args = [".", "-B", "build"];
     Command::new("cmake")
         .args(cmake_args)
