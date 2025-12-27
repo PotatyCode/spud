@@ -10,6 +10,10 @@ pub struct Cli {
 
 #[derive(Subcommand)]
 pub enum Commands {
-    /// Initialise project  
-    Init { proj_name: String },
+    /// Initilise project
+    Init {
+        proj_name: String,
+    },
+    // Build project
+    Build {},
 }
