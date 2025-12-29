@@ -17,5 +17,8 @@ pub enum Commands {
     // Build project
     Build {},
 
-    Run {},
+    Run {
+        #[arg(trailing_var_arg = true, allow_hyphen_values = true)]
+        args: Vec<String>,
+    },
 }
