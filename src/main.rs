@@ -25,10 +25,20 @@ fn run(cli: Cli) -> Result<()> {
             Ok(())
         }
         Commands::Run { args } => {
-            let config = Config::load("Spud.toml").context("failed to load Spud.toml")?;
-            let spud_args: Vec<_> = args.iter().take_while(|&arg| arg != "--").skip(1).collect();
-            let project_args: Vec<&String> =
-                args.iter().skip_while(|&arg| arg != "--").skip(1).collect();
+            if args.is_empty() {
+                println!("no args");
+            }
+            let config = config::Config::load("Spud.toml")?;
+            let (spud_args, project_args) = run::split_args(args);
+            for arg in &spud_args {
+                println!("SPUD {}", arg);
+            }
+            for arg in &project_args {
+                println!("Project {}", arg);
+            }
+            if project_args.is_empty() {
+                println!("no project args");
+            }
             build().context("failed to build")?;
             run::run(&config, project_args)?;
             Ok(())

@@ -18,7 +18,6 @@ pub enum Commands {
     Build {},
 
     Run {
-        #[arg(trailing_var_arg = true, allow_hyphen_values = true)]
         args: Vec<String>,
     },
 }
