@@ -25,10 +25,8 @@ fn run(cli: Cli) -> Result<()> {
             Ok(())
         }
         Commands::Run { args } => {
-            let config = Config::load("Spud.toml").context("failed to load Spud.toml")?;
-            let spud_args: Vec<_> = args.iter().take_while(|&arg| arg != "--").skip(1).collect();
-            let project_args: Vec<&String> =
-                args.iter().skip_while(|&arg| arg != "--").skip(1).collect();
+            let config = Config::load("Spud.toml")?;
+            let (spud_args, project_args) = run::split_args(args);
             build().context("failed to build")?;
             run::run(&config, project_args)?;
             Ok(())
