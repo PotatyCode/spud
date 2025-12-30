@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use crate::{build::build, cli::Commands, config::Config};
 use anyhow::{Context, Ok, Result};
 use clap::Parser;
@@ -21,14 +23,16 @@ fn run(cli: Cli) -> Result<()> {
             Ok(())
         }
         Commands::Build {} => {
-            let config = Config::load("Spud.toml").context("failed to load Spud.toml")?;
+            let config =
+                Config::load(Path::new("Spud.toml")).context("failed to load Spud.toml")?;
             build(&config).context("failed to build")?;
             build(&config).context("failed to build")?;
             Ok(())
         }
         Commands::Run { args } => {
-            let config = Config::load("Spud.toml")?;
-            let (spud_args, project_args) = run::split_args(args);
+            let config =
+                Config::load(Path::new("Spud.toml")).context("Failed to load Spud.toml")?;
+            let (_spud_args, project_args) = run::split_args(args);
             build(&config).context("failed to build")?;
             run::run(&config, project_args)?;
             Ok(())

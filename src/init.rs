@@ -12,7 +12,7 @@ pub fn init_project(proj_name: &str) -> Result<()> {
     fs::create_dir(proj_name)
         .with_context(|| format!("Failed to create directory {proj_name}",))?;
     create_toml(proj_name, &root_dir)?;
-    let config = Config::load("Spud.toml").context("failed to load Spud.toml")?;
+    let config = Config::load(&root_dir.join("Spud.toml")).context("failed to load Spud.toml")?;
     create_fs(&config, &root_dir)?;
     Ok(())
 }
@@ -25,9 +25,6 @@ fn create_toml(proj_name: &str, root_dir: &Path) -> Result<()> {
     Ok(())
 }
 fn create_fs(config: &Config, root_dir: &Path) -> Result<()> {
-    fs::create_dir(root_dir)
-        .with_context(|| format!("Failed to create directory {}", config.project.name))?;
-
     const SUB_DIRS: [&str; 2] = ["include", "src"];
     for dir in SUB_DIRS {
         let new_dir = root_dir.join(dir);
@@ -40,8 +37,5 @@ fn create_fs(config: &Config, root_dir: &Path) -> Result<()> {
 
     let mut cmake = File::create_new(root_dir.join("CMakeLists.txt"))?;
     cmake.write_all(scripts::cmake_template(config).as_bytes())?;
-
-    let mut toml = File::create_new(root_dir.join("Spud.toml"))?;
-    toml.write_all(scripts::spud_toml::spud_toml(&config.project.name).as_bytes())?;
     Ok(())
 }

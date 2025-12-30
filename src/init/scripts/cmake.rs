@@ -1,6 +1,6 @@
 use indoc::formatdoc;
 
-use crate::config::{self, Config};
+use crate::config::Config;
 
 pub fn cmake_template(config: &Config) -> String {
     formatdoc! {r#"

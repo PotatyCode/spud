@@ -1,6 +1,6 @@
 use anyhow::{Context, Ok, Result};
 use serde::Deserialize;
-use std::fs::read_to_string;
+use std::{fs::read_to_string, path::Path};
 #[derive(Deserialize, Debug)]
 pub struct Config {
     pub project: Project,
@@ -12,7 +12,7 @@ pub struct Project {
     pub compiler: String,
 }
 impl Config {
-    pub fn load(path: &str) -> Result<Self> {
+    pub fn load(path: &Path) -> Result<Self> {
         let contents = read_to_string(path).context("failed to read toml file")?;
         Ok(toml::from_str(&contents)?)
     }
