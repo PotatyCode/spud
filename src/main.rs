@@ -26,7 +26,7 @@ fn run(cli: Cli) -> Result<()> {
         }
         Commands::Run { args } => {
             let config = Config::load("Spud.toml")?;
-            let (spud_args, project_args) = run::split_args(args);
+            let (_spud_args, project_args) = run::split_args(args);
             build().context("failed to build")?;
             run::run(&config, project_args)?;
             Ok(())
