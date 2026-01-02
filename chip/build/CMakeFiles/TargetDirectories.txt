@@ -1,3 +1,0 @@
-/home/potatyman/Work/Projects/spud/chip/build/CMakeFiles/chip.dir
-/home/potatyman/Work/Projects/spud/chip/build/CMakeFiles/edit_cache.dir
-/home/potatyman/Work/Projects/spud/chip/build/CMakeFiles/rebuild_cache.dir
