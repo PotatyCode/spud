@@ -26,7 +26,6 @@ fn run(cli: Cli) -> Result<()> {
             let config =
                 Config::load(Path::new("Spud.toml")).context("failed to load Spud.toml")?;
             build(&config).context("failed to build")?;
-            build(&config).context("failed to build")?;
             Ok(())
         }
         Commands::Run { args } => {
