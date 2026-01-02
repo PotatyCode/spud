@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/potatyman/Work/Projects/spud/chip/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
