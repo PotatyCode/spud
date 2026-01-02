@@ -11,6 +11,7 @@ pub fn run(config: &Config, args: Vec<String>) -> Result<()> {
         .context("cannot run executable build/")?;
     Ok(())
 }
+
 pub fn split_args(args: Vec<String>) -> (Vec<String>, Vec<String>) {
     let split_pos = args.iter().position(|arg| arg == "::");
     match split_pos {

@@ -16,7 +16,6 @@ pub enum Commands {
     },
     // Build project
     Build {},
-
     Run {
         args: Vec<String>,
     },

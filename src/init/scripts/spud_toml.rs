@@ -6,7 +6,7 @@ pub fn spud_toml(proj_name: &str) -> String {
         [project]
         name = "{proj_name}"
         cpp_standard = 23
-        compiler = "clang"
+        compiler = "clang++"
         "#
     }
 }
