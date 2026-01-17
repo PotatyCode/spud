@@ -1,5 +1,7 @@
+use std::{fs::remove_dir_all, path::Path};
+
 use crate::{build::build, cli::Commands, config::Config};
-use anyhow::{Context, Ok, Result};
+use anyhow::{Context, Ok, Result, bail};
 use clap::Parser;
 pub mod build;
 pub mod cli;
@@ -18,20 +20,26 @@ fn run(cli: Cli) -> Result<()> {
     match cli.command {
         Commands::Init { proj_name } => {
             init::init_project(&proj_name).context("Could init project")?;
-            Ok(())
         }
         Commands::Build {} => {
-            let config = Config::load("Spud.toml").context("failed to load Spud.toml")?;
+            let config =
+                Config::load(Path::new("Spud.toml")).context("failed to load Spud.toml")?;
             build(&config).context("failed to build")?;
-            build(&config).context("failed to build")?;
-            Ok(())
         }
         Commands::Run { args } => {
-            let config = Config::load("Spud.toml")?;
-            let (spud_args, project_args) = run::split_args(args);
+            let config =
+                Config::load(Path::new("Spud.toml")).context("Failed to load Spud.toml")?;
+            let (_spud_args, project_args) = run::split_args(args);
             build(&config).context("failed to build")?;
             run::run(&config, project_args)?;
-            Ok(())
+        }
+        Commands::Clean {} => {
+            if Path::new("build").exists() {
+                remove_dir_all("build")?
+            } else {
+                eprintln!("No build files to clean")
+            }
         }
     }
+    Ok(())
 }

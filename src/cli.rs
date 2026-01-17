@@ -19,4 +19,5 @@ pub enum Commands {
     Run {
         args: Vec<String>,
     },
+    Clean {},
 }
