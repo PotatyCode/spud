@@ -1,7 +1,7 @@
 use std::{fs::remove_dir_all, path::Path};
 
 use crate::{build::build, cli::Commands, config::Config, run::execute};
-use anyhow::{Context, Ok, Result, bail};
+use anyhow::{Context, Ok, Result};
 use clap::Parser;
 pub mod build;
 pub mod cli;

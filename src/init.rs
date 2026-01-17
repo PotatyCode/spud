@@ -36,6 +36,6 @@ fn create_fs(config: &Config, root_dir: &Path) -> Result<()> {
     hello_world.write_all(scripts::hello_world(&config.project.name).as_bytes())?;
 
     let mut cmake = File::create_new(root_dir.join("CMakeLists.txt"))?;
-    cmake.write_all(scripts::cmake_template(&config).as_bytes())?;
+    cmake.write_all(scripts::cmake_template(config).as_bytes())?;
     Ok(())
 }
