@@ -1,4 +1,0 @@
-[project]
-name = "chip"
-cpp_standard = 23
-compiler = "clang++"

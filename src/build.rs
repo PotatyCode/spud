@@ -1,23 +1,26 @@
-use crate::config::Config;
-use anyhow::{Context, Result};
+use crate::{cli::BuildArgs, config::Config};
+use anyhow::{Result, bail};
 use std::process::Command;
-pub fn build(config: &Config) -> Result<()> {
-    let cmake_args = [
-        "-B",
-        "build",
-        "-G",
-        "Ninja",
-        &format!("-DCMAKE_CXX_COMPILER={}", config.project.compiler),
-    ];
-    let build = Command::new("cmake")
-        .args(cmake_args)
-        .status()
-        .context("Cmake failed to build")?;
+pub fn build(args: &BuildArgs, config: &Config) -> Result<()> {
+    let compiler_arg = &format!("-DCMAKE_CXX_COMPILER={}", config.project.compiler);
+    let mut cmake_args: Vec<&str> = vec!["-B", "build", "-G", "Ninja", compiler_arg];
+    if args.release {
+        cmake_args.push("-DCMAKE_BUILD_TYPE=Release");
+    }
+    let output = Command::new("cmake").args(cmake_args).output()?;
 
-    if build.success() {
-        let _comp = Command::new("cmake")
-            .args(["--build", "build", "--parallel"])
-            .status()?;
+    if !output.status.success() {
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        let stderr = String::from_utf8_lossy(&output.stderr);
+        bail!("CMake configuration failed:\n{}{}", stdout, stderr);
+    }
+
+    let output = Command::new("cmake")
+        .args(["--build", "build", "--parallel"])
+        .output()?;
+    if !output.status.success() {
+        let stdout = String::from_utf8_lossy(&output.stdout);
+        bail!("\n{}", stdout);
     }
     Ok(())
 }
