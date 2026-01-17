@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/home/potatyman/Work/Projects/spud/chip/build",
+  "command": "/usr/bin/clang++ -std=c++23 @CMakeFiles/chip.dir/src/main.cpp.o.modmap -o CMakeFiles/chip.dir/src/main.cpp.o -c /home/potatyman/Work/Projects/spud/chip/src/main.cpp",
+  "file": "/home/potatyman/Work/Projects/spud/chip/src/main.cpp",
+  "output": "/home/potatyman/Work/Projects/spud/chip/build/CMakeFiles/chip.dir/src/main.cpp.o"
+}
+]

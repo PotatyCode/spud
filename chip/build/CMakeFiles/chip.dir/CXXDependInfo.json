@@ -1,0 +1,27 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "Clang",
+	"compiler-simulate-id" : "",
+	"config" : "",
+	"cxx-modules" : {},
+	"database-info" : null,
+	"dir-cur-bld" : "/home/potatyman/Work/Projects/spud/chip/build",
+	"dir-cur-src" : "/home/potatyman/Work/Projects/spud/chip",
+	"dir-top-bld" : "/home/potatyman/Work/Projects/spud/chip/build",
+	"dir-top-src" : "/home/potatyman/Work/Projects/spud/chip",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : [],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "/home/potatyman/Work/Projects/spud/chip/build/CMakeFiles/chip.dir",
+	"sources" : 
+	{
+		"CMakeFiles/chip.dir/src/main.cpp.o" : 
+		{
+			"language" : "CXX",
+			"source" : "/home/potatyman/Work/Projects/spud/chip/src/main.cpp"
+		}
+	}
+}
